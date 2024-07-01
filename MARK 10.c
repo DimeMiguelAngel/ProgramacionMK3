@@ -1,13 +1,11 @@
-// SISTEMA DE INVENTARIOS MARK 9
+// SISTEMA DE INVENTARIOS MARK 10
 
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 
 #define MAX_LINE 256
-//Maximo de caracteres en una linea
 #define MAX_PRODUCTS 100
-//limite de productos
 
 struct Sistema {
     char nombre[50];
@@ -39,7 +37,7 @@ void tablita_entxt(FILE *file, struct Sistema productos[], int num_productos) {
 int main() {
     struct Sistema productos[MAX_PRODUCTS];
     int num_productos = 0;
-    FILE *file = fopen("Sistema_de_Inventarios.txt", "r+");
+    FILE *file = fopen("Sistema_de_Inventarios.txt", "w+");
 
     if (file == NULL) {
         printf("Hubo un error al intentar abrir el archivo.\n");
@@ -72,7 +70,7 @@ int main() {
         getchar(); // Captura el '\n' pendiente después del scanf de la opción
 
         switch (opcion) {
-            case 1:
+            case 1: {
                 printf("Ingrese el nombre del producto: ");
                 fgets(productos[num_productos].nombre, 50, stdin);
                 cambiando_saltolinea(productos[num_productos].nombre);
@@ -85,7 +83,8 @@ int main() {
                 tablita_entxt(file, productos, num_productos);
                 printf("Producto agregado al inventario.\n");
                 break;
-            case 2:
+            }
+            case 2: {
                 char editar_nombre[50];
                 printf("Ingrese el nombre del producto a editar:\n");
                 fgets(editar_nombre, 50, stdin);
@@ -108,7 +107,8 @@ int main() {
                     printf("Producto no encontrado.\n");
                 }
                 break;
-            case 3:
+            }
+            case 3: {
                 char eliminar_nombre[50];
                 printf("Ingrese el nombre del producto a eliminar:\n");
                 fgets(eliminar_nombre, 50, stdin);
@@ -130,7 +130,8 @@ int main() {
                     printf("Producto no encontrado.\n");
                 }
                 break;
-            case 4:
+            }
+            case 4: {
                 printf("Opción 4: Ver lista de productos.\n");
                 printf("Nombre           | Cantidad   | Precio\n");
                 printf("---------------------------------------------\n");
@@ -138,16 +139,18 @@ int main() {
                     printf("%-17s| %-10d| %.2f\n", productos[i].nombre, productos[i].cantidad, productos[i].precio);
                 }
                 break;
-            case 5:
+            }
+            case 5: {
                 printf("Saliendo del sistema, se han guardado todos los cambios.\n");
                 fclose(file);
                 return 0;
-            default:
+            }
+            default: {
                 printf("Opción no válida.\n");
                 break;
+            }
         }
     }
 
     return 0;
 }
-
